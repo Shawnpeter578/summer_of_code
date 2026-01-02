@@ -1,3 +1,8 @@
+<?php
+    include("database.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,7 +130,7 @@
                     <p class="text-gray-500 mt-2">Please enter your details to sign in.</p>
                 </div>
 
-                <form action="#" class="space-y-6">
+                <form action="#" class="space-y-6" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                         <div class="mt-1 relative">
@@ -161,9 +166,9 @@
                         </div>
                     </div>
 
-                    <button type="button"
+                    <button type="submit" name = "login"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gsoc-blue hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gsoc-blue transition-colors">
-                        Sign In
+                        Log In
                     </button>
                 </form>
 
@@ -305,7 +310,7 @@
                     <p class="text-gray-500 mt-2">Apply for Slugworks SOE Summer of Code.</p>
                 </div>
 
-                <form action="#" class="space-y-4">
+                <form action="#" class="space-y-4" action = "<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method = "post">
                     <!-- Name -->
                     <div>
                         <label for="reg-name" class="block text-sm font-medium text-gray-700">Full Name</label>
@@ -376,7 +381,7 @@
                         </div>
                     </div>
 
-                    <button type="button"
+                    <button type="submit"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gsoc-green hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gsoc-green transition-colors mt-4">
                         Register Account
                     </button>
@@ -442,3 +447,77 @@
 </body>
 
 </html>
+
+<?php
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+    $reg_number = filter_input(INPUT_POST, "reg-number", FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = $_POST['password'];
+    if(empty($name)){
+        echo "ENTER FULL NAME";
+    }
+    elseif(empty($reg_number)){
+        echo "ENTER REGISTER NUMBER";
+    }
+    elseif(empty($email)){
+        echo "ENTER EMAIL";
+    }
+    elseif(empty($password)){
+        echo "ENTER PASSWORD";
+    }
+    else{
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users(reg_number,name,email,password)
+            values('$reg_number','$name','$email','$hash')";
+    try{
+        mysqli_query($conn,$sql);
+            echo "YOU ARE SUCESSFULLY REGISTERED";
+             echo "<script> setTimeout(function() {
+                        window.location.href = '../index.php';
+                        }, 2000); </script>";
+
+    }
+     catch(mysqli_sql_exception){
+                echo "choose another username";
+            }
+    
+}
+}
+
+if(isset($_POST['login'])){
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($conn, $sql);
+    
+     if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $hashed_password = $row['password'];
+                if(password_verify($password, $hashed_password)){
+                         $_SESSION['user_id'] = $row['id'];
+                         $_SESSION['user_name'] = $row['name'];
+                        echo "<script>
+                                        setTimeout(function() {
+                                            window.location.href = '../index.php';
+                                        }, 2000);
+                                    </script>";
+
+                }else {
+                    $message = "Invalid Password";
+                }
+            }
+else{
+    $message = "USER NOT FOUND";
+}
+}
+
+
+
+
+
+
+?>
