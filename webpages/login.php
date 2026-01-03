@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("database.php");
 
 ?>
@@ -200,7 +201,7 @@
                     <p class="text-gray-500 mt-2">Log in with credentials provided by your Org Admin.</p>
                 </div>
 
-                <form action="#" class="space-y-6">
+                <form action="#" class="space-y-6"  action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
                     <div>
                         <label for="mentor-name" class="block text-sm font-medium text-gray-700">Full Name</label>
                         <div class="mt-1 relative">
@@ -237,7 +238,7 @@
                         </div>
                     </div>
 
-                    <button type="button"
+                    <button type="submit" name="mentor_login"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gsoc-green hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gsoc-green transition-colors">
                         Mentor Sign In
                     </button>
@@ -381,7 +382,7 @@
                         </div>
                     </div>
 
-                    <button type="submit"
+                    <button type="submit" name ="student_register"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gsoc-green hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gsoc-green transition-colors mt-4">
                         Register Account
                     </button>
@@ -450,7 +451,7 @@
 
 <?php
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['student_register'])){
     $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
     $reg_number = filter_input(INPUT_POST, "reg-number", FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -516,6 +517,45 @@ else{
 }
 
 
+
+
+
+
+
+
+?>
+
+<?php
+
+
+//mentor php logic
+
+if(isset($_POST['mentor_login'])){
+    $mentor_name = filter_input(INPUT_POST, "mentor-name", FILTER_SANITIZE_SPECIAL_CHARS);
+    $mentor_email = filter_input(INPUT_POST, "mentor-email", FILTER_SANITIZE_EMAIL);
+    $mentor_password = $_POST['mentor-password'];
+    if(empty($mentor_name)){
+        echo "ENTER FULL NAME";
+    }
+    elseif(empty($mentor_email)){
+        echo "ENTER EMAIL";
+    }
+    else{
+        $mhash = password_hash($mentor_password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO mentorlogs(mname,memail,mpass)
+            VALUES('$mentor_name','$mentor_email','$mhash')";
+    try{
+        mysqli_query($conn,$sql);
+            echo "MENTOR REGISTERED SUCESSFULLY";
+             echo "<script> setTimeout(function() {
+                        window.location.href = '../index.php';
+                        }, 2000); </script>";
+    }
+    catch(mysqli_sql_exception){
+        echo "choose another username";
+    }
+}
+}
 
 
 
