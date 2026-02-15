@@ -1,78 +1,109 @@
-🌐 OPEN SOURCE SUMMER WEBSITE
+🌍 Summer of Code
 
-A vibrant hub for students to showcase, collaborate, and build open-source projects during the summer.
+Summer of Code is an open-source initiative designed to help students, developers, and tech enthusiasts contribute to real-world projects, build skills, and grow their developer portfolio through hands-on collaboration.
 
-Welcome to the Summer of Code web platform — a place where contributors young and old can gather to host their projects, share learning, and build real world code together. Whether you’re just getting started or deep into your first open-source contribution, this site is your summer sandbox! ☀️✨
+This platform serves as a central hub where participants can explore projects, register, and actively take part in open-source development during the summer program.
 
-🧠 About
-
-This repository hosts the source for the Open Source Summer Website — a simple, student-focused platform that:
-
-🎯 Lets students host and display open-source project work
-
-🤝 Encourages collaboration by providing a lightweight web presence
-
-🔧 Acts as a stepping stone into open source contribution culture
-
-The goal of this project is to make open source summer contributions accessible and visible to everyone — students, mentors, and the community. It’s built with approachable web basics so contributors can jump in easily and grow their skills.
-
-This project was originally forked from a similar summer_of_code template and expanded into a standalone collaboration space.
+🔗 Official Website: http://opensourcesummer.liveblog365.com/
 
 🚀 Features
 
-✔️ Simple website structure for project showcases
-✔️ Easy to host on GitHub Pages or any LAMP / PHP-based host
-✔️ Designed for students to personalize with their own work
-✔️ Encourages community contributions and friendly collaboration
+📌 Centralized platform for Summer of Code program details
 
-📦 Technologies
+🧑‍💻 Supports student participation in open-source contributions
 
-This site is built with:
+📂 Project listing and contribution workflow support
 
-PHP – Server-side rendering and lightweight logic
+🌐 Web-based access for easy participation
 
-HTML & CSS – Clean structure and styling
+🤝 Encourages collaboration between mentors and contributors
 
-Hack / PHP mix – Main languages powering the repository
+📁 Project Structure
+summer_of_code/
+│── (source files)
+│── (assets)
+│── README.md
 
-Feel free to improve or migrate to frameworks like React, Vue, or Next.js as you see fit!
 
-🛠️ Setup
+(Project structure may vary based on updates and new features.)
 
-To run locally:
+🛠️ Tech Stack
 
-Clone the repository
+Frontend: HTML, CSS, JavaScript (or relevant stack used in repo)
+
+Backend: PHP / Node.js (if applicable)
+
+Hosting: LiveBlog365 / Web Hosting platform
+
+Version Control: Git & GitHub
+
+📌 Installation & Setup
+
+Clone the repository:
 
 git clone https://github.com/Shawnpeter578/summer_of_code.git
 
 
-Serve with a local PHP server
+Navigate into the project folder:
 
-php -S localhost:8000
+cd summer_of_code
 
 
-Visit http://localhost:8000 in your browser
+Run the project locally (depending on setup):
 
-Start customizing your summer project pages!
+If it's a static website: open index.html in your browser
 
-📣 Contributing
+If it requires a server (PHP/Node): run using your local server setup
 
-Open source is all about community! You can contribute by:
+🌐 Live Demo
 
-✏️ Improving the UI / UX
+You can access the live version of the project here:
 
-📚 Adding documentation or help pages
+👉 http://opensourcesummer.liveblog365.com/
 
-🔗 Creating templates for students to add projects
+🤝 Contributing
 
-🐛 Fixing bugs or building new features
+Contributions are welcome and appreciated!
 
-Just fork the repo and send a pull request. Friendly feedback and good first issues are always welcome! ❤️
+To contribute:
+
+Fork the repository
+
+Create a new branch
+
+git checkout -b feature-name
+
+
+Make changes and commit
+
+git commit -m "Added new feature"
+
+
+Push changes
+
+git push origin feature-name
+
+
+Open a Pull Request
+
+📌 Future Improvements
+
+Add contributor dashboard
+
+Improve UI/UX design
+
+Add project submission system
+
+Add mentor verification & approval workflow
+
+Integrate leaderboard / contribution tracking
+
+🧑‍💼 Author
+
+Shawn Peter
+GitHub: @Shawnpeter578
 
 📜 License
 
-This repository inherits the same license as the original summer_of_code web template. If none is present, consider adopting an open-source license like MIT or Apache 2.0 so others can reuse your work freely.
-
-🙌 Get Involved
-
-Ready to power up your open-source journey? Host a project, make friends in code, and let your summer of coding be unforgettable! 🛠️🌊
+This project is open-source and available under the MIT License.
+Feel free to use, modify, and distribute with proper attribution.
